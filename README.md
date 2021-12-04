@@ -26,6 +26,17 @@ $ cmake .. -DCMAKE_BUILD_TYPE=Debug
 $ code ..
 ```
 
+### Download Toolchain
+
+Download the `gcc-arm-none-eabi-10.3-2021.10` Toolchain from the [ARM Website](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
+and extract it to the `toolchains` folder. Example for Linux x86_64:
+
+```bash
+$ cd toolchains
+$ wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+$ tar -xf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+```
+
 ### Raspberry PI setup
 
 1. Open the Getting Started Guide from the Raspberry PI Foundation ([see here](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf)).
