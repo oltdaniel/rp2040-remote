@@ -5,36 +5,33 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch",
+            "name": "Launch gdb-multiarch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/src/main.elf",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/src",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerServerAddress": "192.168.188.27:3333",
             "miDebuggerPath": "${workspaceFolder}/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gdb",
-            "miDebuggerArgs": "--cd=${workspaceFolder} --interpreter mi -x ${workspaceFolder}/.gdbinit",
+            "miDebuggerArgs": "--cd=${workspaceFolder} --interpreter mi --nx",
+            "MIMode": "gdb",
             "targetArchitecture": "arm",
+            "program": "${workspaceFolder}/build/src/main.elf",
             "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
+                {"text": "set remotetimeout 5"},
+                {"text": "target remote ${input:pico_remote}:3333"},
+                {"text": "monitor reset init"},
+                {"text": "file 'build/src/main.elf'"},
+                {"text": "load"},
+                {"text": "break main","ignoreFailures": true}
             ],
-            "logging": {"engineLogging": true},
             "preLaunchTask": "build",
-            "windows": {
-                "name": "(gdb) Launch",
-                "type": "cppdbg",
-                "request": "launch",
-                "program": "${workspaceFolder}/build/src/main.elf",
-                "miDebuggerPath": "${workspaceFolder}/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gdb.exe"
-            }
+            "launchCompleteCommand": "None",
+            "externalConsole": false,
+            "cwd": "${workspaceFolder}/src"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "pico_remote",
+            "type": "promptString",
+            "description": "Remote IP for our controller."
         }
     ]
 }
